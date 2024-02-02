@@ -1,0 +1,28 @@
+version: "3.5"
+name: azure_graph_api
+
+services:
+  app:
+    container_name: azure_graph_api-app
+    networks:
+      - LAN
+    build:
+      context: .
+      dockerfile: Dockerfile
+    tty: true
+    entrypoint: /bin/bash
+    volumes:
+      - ./:/azure-graph-api
+    environment:
+      DL_PREFIX:
+      OWNER_EMAIL:
+      MEMBER_EMAIL:
+      AZURE_CLIENT_ID:
+      AZURE_TENANT_ID:
+      AZURE_THUMBPRINT:
+      AZURE_PRIVATE_KEY:
+
+networks:
+  LAN:
+    driver: bridge
+    name: azure_graph_api
