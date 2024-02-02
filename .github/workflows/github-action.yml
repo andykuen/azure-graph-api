@@ -24,5 +24,13 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run Script
+        env:
+          DL_PREFIX: ${{ vars.DL_PREFIX }}
+          OWNER_EMAIL: ${{ secrets.OWNER_EMAIL }}
+          MEMBER_EMAIL: ${{ secrets.MEMBER_EMAIL }}
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          AZURE_THUMBPRINT: ${{ secrets.AZURE_THUMBPRINT }}
+          AZURE_PRIVATE_KEY: ${{ secrets.AZURE_PRIVATE_KEY }}
         run: |
           python app.py
