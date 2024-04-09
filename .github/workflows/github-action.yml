@@ -41,16 +41,13 @@ jobs:
         run: |
           python app.py
 
-      - name: Save Log
-        run: |
-          date -u '+Date: %F Time: %H:%M:%S %Z' >> actions.log
-
-      - name: commit and push
+      - name: Save Log on log/cronjob branch
         run: |
           git config --global user.name "github-actions"
           git config --global user.email ""
 
-          git checkout -b cronjob origin/cronjob
+          git checkout -b log/cronjob origin/log/cronjob
+          date -u '+Date: %F Time: %H:%M:%S %Z' >> actions.log
           git add .
           git commit -m "cronjob: run id ${{ github.run_id }}"
-          git push --set-upstream origin cronjob
+          git push --set-upstream origin log/cronjob
