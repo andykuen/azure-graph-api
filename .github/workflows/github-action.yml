@@ -36,3 +36,17 @@ jobs:
           AZURE_PRIVATE_KEY: ${{ secrets.AZURE_PRIVATE_KEY }}
         run: |
           python app.py
+
+      - name: Save Log
+        run: |
+          date -u '+Date: %F Time: %H:%M:%S %Z' >> actions.log
+
+      - name: commit and push
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email ""
+
+          git checkout cronjob
+          git add .
+          git commit -m "cronjob: run id ${{ github.run_id }}"
+          git push --set-upstream origin cronjob
